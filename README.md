@@ -1,4 +1,4 @@
-df = pd.read_excel('ventas.xlsx')
+
 # Proyecto Automatización de Excel — Documentación detallada
 
 Este README describe exactamente qué se ha hecho en el proyecto hasta ahora, por qué aparecieron ciertos errores durante la instalación de dependencias, y explica línea a línea el contenido actual de `main.py`. También incluye comandos para ejecutar, recomendaciones y el estado del repo.
@@ -6,8 +6,10 @@ Este README describe exactamente qué se ha hecho en el proyecto hasta ahora, po
 ## Resumen de lo hecho hasta ahora
 
 - Se detectó un error al intentar instalar dependencias por escribir mal el paquete (`openpyx1` en lugar de `openpyxl`). Se corrigió instalando `openpyxl`.
-- Se creó o usó un entorno virtual del proyecto (`.venv`) y se instalaron `pandas` y `openpyxl` en ese entorno.
-- `main.py` fue modificado para: crear un DataFrame, imprimirlo, intentar exportarlo a `ventas.xlsx` con manejo de errores, y luego leer `ventas.xlsx` para imprimir su contenido de nuevo.
+
+Última actualización: 17 de abril de 2026
+
+````
 - Se creó este `README.md` con instrucciones para ejecutar el proyecto y solucionar errores comunes.
 
 ## Explicación línea a línea de `main.py`
@@ -114,4 +116,3 @@ Si tu remoto requiere autenticación por token, usa un PAT al hacer push por HTT
 
 ---
 
-Si quieres, hago ahora el commit y hago push al remoto por ti — dime si prefieres usar HTTPS (te pedirá token) o SSH (si ya tienes llave configurada). Si estás de acuerdo, empujo `README.md` y el commit al remoto `origin`.
