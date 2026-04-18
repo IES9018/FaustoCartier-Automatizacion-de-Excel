@@ -1,110 +1,117 @@
-# Proyecto Automatización de Excel — Notas y solución de errores
-
-## Resumen rápido
-Este README recoge la explicación de un error que apareció al intentar instalar dependencias y los pasos realizados para arreglarlo. También incluye instrucciones claras para reproducir, ejecutar y extender el proyecto en Windows/PowerShell.
-
-## ¿Qué ocurrió? (causa del error)
-- Mensaje original observado al intentar instalar: "Defaulting to user installation because normal site-packages is not writeable". Esto indica que pip no pudo escribir en los paquetes globales (falta de permisos), por lo que optó por instalar en el espacio de usuario. Esto es habitual cuando no se ejecuta como administrador.
-- Error crítico: "Could not find a version that satisfies the requirement openpyx1" y "No matching distribution found for openpyx1". Esto ocurrió porque se escribió mal el nombre del paquete: `openpyx1` (con un '1') no existe. El paquete correcto para leer/escribir archivos .xlsx desde pandas es `openpyxl`.
-
-## Qué hice aquí (pasos realizados, comentados)
-1. Verifiqué y usé el entorno Python del proyecto (virtualenv) para instalar dependencias en el entorno correcto.
-2. Instalé el paquete correcto `openpyxl` en el entorno del proyecto.
-3. Verifiqué la versión de `openpyxl` importándolo (por ejemplo, se detectó la versión `3.1.5`).
-4. Edité `main.py` para añadir:
-   - Un intento de exportar el DataFrame a `ventas.xlsx` con manejo de excepciones y un mensaje claro si `openpyxl` falta.
-   - Lectura posterior de `ventas.xlsx` y mostrar su contenido (el archivo se crea y se vuelve a leer en el script actual).
-5. Al ejecutar el script con el Python del virtualenv faltaba `pandas` en el entorno, así que también instalé `pandas` en el virtualenv.
-6. Ejecuté el script y confirmé que imprime el DataFrame y crea `ventas.xlsx`.
-
-## Resultado comprobado
-Salida de la ejecución (ejemplo):
-
-```
-    Nombre  Ventas
-0      Juan     100
-1     Pedro     500
-2      Jose     200
-3  Santiago      50
-Archivo 'ventas.xlsx' creado correctamente en el directorio de trabajo.
-```
-
-El archivo `ventas.xlsx` se crea en el directorio del proyecto.
-
-## Comandos recomendados (PowerShell / Windows)
-Si no usas virtualenv y prefieres instalar localmente para tu usuario:
-
-```powershell
-python -m pip install --user openpyxl
-```
-
-Recomendado (crear y usar virtualenv dentro del proyecto):
-
-```powershell
-# crear virtualenv en la carpeta del proyecto (si no existe)
-python -m venv .venv
-
-# activar el virtualenv (PowerShell)
-& .\.venv\Scripts\Activate.ps1
-
-# instalar dependencias dentro del virtualenv
-python -m pip install pandas openpyxl
-
-# ejecutar el script
-python .\main.py
-```
-
-Si no quieres activar el virtualenv, puedes llamar directamente al ejecutable del entorno (útil si hay espacios en la ruta); en PowerShell usa `&` antes de la ruta:
-
-```powershell
-& "c:/Users/faust/OneDrive/Desktop/Proyecto Automatización de Excel/.venv/Scripts/python.exe" "c:/Users/faust/OneDrive/Desktop/Proyecto Automatización de Excel/main.py"
-```
-
-Nota: en PowerShell se recomienda usar el operador `&` para ejecutar rutas que contengan espacios.
-
-## Qué cambié en `main.py`
-- Añadí un bloque que intenta guardar el DataFrame a `ventas.xlsx` y captura `ImportError` para mostrar un mensaje claro si falta `openpyxl`.
-- Añadí manejo genérico de excepciones al guardar para mostrar el error exacto en caso de fallo.
-- El archivo ahora también intenta leer `ventas.xlsx` y mostrar su contenido (útil para comprobar que la exportación fue correcta).
-
-Contenido relevante aproximado (resumen):
-
-```python
-import pandas as pd
-
-# ... crear DataFrame ...
-print(df)
-
-try:
-    df.to_excel('ventas.xlsx', index=False)
-    print("Archivo 'ventas.xlsx' creado correctamente en el directorio de trabajo.")
-except ImportError:
-    print("No se pudo guardar a Excel: falta el paquete 'openpyxl'. Instálalo con:\npython -m pip install --user openpyxl")
-except Exception as e:
-    print('Error al guardar el archivo Excel:', e)
-
-# leer ventas.xlsx y mostrar
 df = pd.read_excel('ventas.xlsx')
-print(df)
+# Proyecto Automatización de Excel — Documentación detallada
+
+Este README describe exactamente qué se ha hecho en el proyecto hasta ahora, por qué aparecieron ciertos errores durante la instalación de dependencias, y explica línea a línea el contenido actual de `main.py`. También incluye comandos para ejecutar, recomendaciones y el estado del repo.
+
+## Resumen de lo hecho hasta ahora
+
+- Se detectó un error al intentar instalar dependencias por escribir mal el paquete (`openpyx1` en lugar de `openpyxl`). Se corrigió instalando `openpyxl`.
+- Se creó o usó un entorno virtual del proyecto (`.venv`) y se instalaron `pandas` y `openpyxl` en ese entorno.
+- `main.py` fue modificado para: crear un DataFrame, imprimirlo, intentar exportarlo a `ventas.xlsx` con manejo de errores, y luego leer `ventas.xlsx` para imprimir su contenido de nuevo.
+- Se creó este `README.md` con instrucciones para ejecutar el proyecto y solucionar errores comunes.
+
+## Explicación línea a línea de `main.py`
+
+Abajo tienes el archivo `main.py` actual (línea por línea) con una explicación para cada instrucción.
+
+1. import pandas as pd
+    - Importa la librería pandas y la referencia como `pd`. Pandas es usada para crear y manipular DataFrames.
+
+2. 
+    - Línea en blanco para separar bloques lógicos (estética/legibilidad).
+
+3. data = {
+    - Se define un diccionario llamado `data` que contiene dos claves: `Nombre` y `Ventas`.
+
+4.     "Nombre": ["Juan", "Pedro", "Jose", "Santiago", "Juanjo"],
+    - Lista de nombres que será la columna `Nombre` del DataFrame.
+
+5.     "Ventas": [100, 500, 200, 50, 350]
+    - Lista de valores numéricos que será la columna `Ventas` del DataFrame.
+
+6. }
+    - Cierre del diccionario `data`.
+
+7. 
+    - Línea en blanco.
+
+8. df = pd.DataFrame(data)
+    - Convierte el diccionario `data` en un DataFrame de pandas llamado `df`.
+
+9. 
+    - Línea en blanco.
+
+10. print(df)
+    - Imprime el DataFrame en la consola para verificar su contenido.
+
+11. 
+    - Línea en blanco.
+
+12. # Intentar exportar a Excel (.xlsx). Requiere el paquete `openpyxl`.
+    - Comentario que indica la intención de exportar a Excel y la dependencia necesaria.
+
+13. try:
+    - Inicio de un bloque try/except para capturar errores al guardar el archivo.
+
+14.     df.to_excel('ventas.xlsx', index=False)
+    - Intenta escribir el DataFrame en el archivo `ventas.xlsx` sin incluir el índice (fila 0,1,...).
+      Requiere un motor para XLSX (normalmente `openpyxl`).
+
+15.     print("Archivo 'ventas.xlsx' creado correctamente en el directorio de trabajo.")
+    - Mensaje de éxito si la escritura a Excel funciona.
+
+16. except ImportError:
+    - Captura específicamente el error ImportError que se levantaría si falla la importación del motor (`openpyxl`).
+
+17.     # Esto ocurriría si falta el motor para escribir .xlsx
+    - Comentario explicativo.
+
+18.     print("No se pudo guardar a Excel: falta el paquete 'openpyxl'. Instálalo con:\npython -m pip install --user openpyxl")
+    - Mensaje que indica cómo instalar `openpyxl` si no está presente.
+
+19. except Exception as e:
+    - Captura cualquier otro error que pueda ocurrir durante la escritura.
+
+20.     print('Error al guardar el archivo Excel:', e)
+    - Imprime el error concreto para ayudar al diagnóstico.
+
+21.     
+    - Línea en blanco.
+
+22. 
+23. import pandas as pd 
+    - Importación duplicada: vuelve a importar `pandas` (no es necesaria si ya se importó arriba). Se recomienda eliminar esta línea duplicada.
+
+24. df = pd.read_excel("ventas.xlsx")
+    - Lee el archivo `ventas.xlsx` que debería haberse creado y lo carga en `df` (reemplazando el DataFrame anterior en memoria).
+
+25. print(df)
+    - Imprime el DataFrame leído desde Excel para confirmar que la exportación fue correcta.
+
+### Observaciones y recomendaciones sobre `main.py`
+
+- Hay una importación duplicada de pandas (línea 23). Es inofensiva, pero redundante; se recomienda quitarla.
+- Si `df.to_excel` falla por permisos o porque `openpyxl` no está instalado, el flujo ya muestra mensajes claros. Aun así, sería más robusto comprobar la existencia de `ventas.xlsx` antes de `pd.read_excel` y manejar FileNotFoundError.
+- Si no quieres subir archivos generados (`ventas.xlsx`) al repo, añade `*.xlsx` en `.gitignore`.
+
+## Estado actual del repositorio (lo que se ha subido)
+
+- `main.py` — script principal que crea y exporta un DataFrame a Excel.
+- `README.md` — (este archivo) con la documentación detallada.
+
+Si aún no subiste cambios, en la siguiente sección están los comandos para commitear y empujar.
+
+## Comandos rápidos para commitear y subir (PowerShell)
+
+```powershell
+Set-Location "C:\Users\faust\OneDrive\Desktop\Proyecto Automatización de Excel"
+git add README.md main.py
+git commit -m "docs: actualizar README con explicación línea a línea de main.py y resumen de cambios"
+git push -u origin main
 ```
 
-## Recomendaciones / siguientes pasos
-- Crear un `requirements.txt` con las dependencias del proyecto para que sea más sencillo instalar todo (ejemplo abajo). Si quieres, lo creo ahora.
-
-Ejemplo `requirements.txt` mínimo:
-```
-pandas
-openpyxl
-```
-
-- Si prefieres que el script pida por consola el nombre del archivo de salida o una ruta, puedo modificar `main.py` para añadir una opción interactiva o parámetros de línea de comandos.
-- Puedo añadir un pequeño `README` más técnico con instrucciones para producción (por ejemplo, cómo crear un instalador, usar Task Scheduler, etc.).
-
-## Cómo comprobar que todo funciona
-1. Asegúrate de ejecutar el Python del virtualenv o instalar las dependencias en tu usuario.
-2. Ejecuta `main.py` con el Python correcto (ver sección comandos).
-3. Revisa que exista `ventas.xlsx` en el directorio del proyecto y ábrelo con Excel o con pandas (`pd.read_excel('ventas.xlsx')`).
+Si tu remoto requiere autenticación por token, usa un PAT al hacer push por HTTPS, o configura SSH para evitarlo.
 
 ---
 
-Si quieres que cree ahora mismo `requirements.txt` y/o un README más corto con solo los comandos rápidos, dime cuál prefieres (creo ambos sin problema). También puedo revertir cambios en `main.py` o refactorizar para entrada/argumentos si lo deseas.
+Si quieres, hago ahora el commit y hago push al remoto por ti — dime si prefieres usar HTTPS (te pedirá token) o SSH (si ya tienes llave configurada). Si estás de acuerdo, empujo `README.md` y el commit al remoto `origin`.

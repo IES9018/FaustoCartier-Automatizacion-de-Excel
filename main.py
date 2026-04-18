@@ -1,8 +1,8 @@
 import pandas as pd
 
 data = {
-    "Nombre": ["Juan", "Pedro", "Jose", "Santiago"],
-    "Ventas": [100, 500, 200, 50]
+    "Nombre": ["Juan", "Pedro", "Jose", "Santiago", "Juanjo"],
+    "Ventas": [100, 500, 200, 50, 350]
 }
 
 df = pd.DataFrame(data)
