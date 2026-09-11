@@ -1,7 +1,7 @@
 # SPEC — Automatización de Excel para Gestión Financiera de PyMEs
 
 **Versión:** 0.1 (borrador)
-**Autor:** [Tu nombre]
+**Autor:** Fausto Cartier
 **Fecha:** 2026-09-10
 **Estado:** En definición
 
