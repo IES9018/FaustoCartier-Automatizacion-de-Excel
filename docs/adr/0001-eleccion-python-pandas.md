@@ -2,7 +2,7 @@
 
 **Estado:** Aceptada
 **Fecha:** 2026-09-10
-**Decisores:** [Tu nombre]
+**Decisores:** Fausto Cartier
 
 ## Contexto
 
