@@ -8,7 +8,7 @@ El proyecto está pensado para pequeñas y medianas empresas que necesitan regis
 
 **Fase actual:** definición y diseño (versión 0.1).
 
-Actualmente el repositorio contiene la especificación funcional y la decisión tecnológica. La implementación del script, los archivos de entrada/salida, las pruebas y el sistema de logs todavía están pendientes.
+Actualmente el repositorio contiene la especificación funcional, la decisión tecnológica, un pipeline de CI básico y un test de humo. La implementación del script de la automatización (lectura, validación, consolidación, reportes y logs) todavía está pendiente.
 
 ## Objetivos
 
@@ -55,11 +55,17 @@ La elección de Python y pandas está documentada en [ADR-0001](docs/adr/0001-el
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── docs/
 │   ├── SPEC.md
 │   └── adr/
 │       └── 0001-eleccion-python-pandas.md
-└── README.md
+├── test/
+│   └── test_basico.py
+├── README.md
+└── requirements.txt
 ```
 
 ### Documentación

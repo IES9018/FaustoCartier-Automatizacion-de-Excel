@@ -1,0 +1,23 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Cachés de Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Datos y reportes de entrada/salida (no versionar)
+*.xlsx
+*.xlsm
+
+# Editor
+.vscode/
+.idea/
+
+# Sistema
+Thumbs.db
+.DS_Store
