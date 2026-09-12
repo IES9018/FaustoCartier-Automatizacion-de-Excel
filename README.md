@@ -62,7 +62,7 @@ La elección de Python y pandas está documentada en [ADR-0001](docs/adr/0001-el
 │   ├── SPEC.md
 │   └── adr/
 │       └── 0001-eleccion-python-pandas.md
-├── test/
+├── tests/
 │   └── test_basico.py
 ├── README.md
 └── requirements.txt
