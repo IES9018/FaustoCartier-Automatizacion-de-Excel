@@ -60,8 +60,11 @@ La elección de Python y pandas está documentada en [ADR-0001](docs/adr/0001-el
 │       └── ci.yml
 ├── docs/
 │   ├── SPEC.md
+│   ├── architecture/
+│   │   └── c4-diagram.md
 │   └── adr/
-│       └── 0001-eleccion-python-pandas.md
+│       ├── 0001-eleccion-python-pandas.md
+│       └── ADR-002-estilo-arquitectonico.md
 ├── tests/
 │   └── test_basico.py
 ├── README.md
@@ -71,7 +74,9 @@ La elección de Python y pandas está documentada en [ADR-0001](docs/adr/0001-el
 ### Documentación
 
 - [Especificación del proyecto](docs/SPEC.md): problema, objetivos, requisitos, flujo de datos, criterios de aceptación, riesgos y glosario.
+- [Diagrama C4 (contexto y contenedores)](docs/architecture/c4-diagram.md): arquitectura de alto nivel de la herramienta.
 - [ADR-0001: elección de Python y pandas](docs/adr/0001-eleccion-python-pandas.md): alternativas consideradas, decisión y consecuencias.
+- [ADR-002: estilo arquitectónico](docs/adr/ADR-002-estilo-arquitectonico.md): decisión de arquitectura local de escritorio y representación con el modelo C4.
 
 ## Requisitos funcionales previstos
 
